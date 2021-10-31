@@ -1,45 +1,45 @@
 version: "3.7"
 
 services:
-    react-service:
-        build:
-            context: .
-            dockerfile: packages/elearning-frontend/Dockerfile
-        container_name: ${FRONT_CONTAINER_NAME}
-        ports:
-            - ${FRONT_PORT}:80
-        volumes:
-            - service:/front
-        networks:
-            - setel_network
-    payment-service:
-        build:
-            context: .
-            dockerfile: packages/setel-payment/Dockerfile
-        container_name: ${PAYMENT_CONTAINER_NAME}
-        ports:
-            - ${PAYMENT_PORT}:3002
-        volumes:
-            - service:/payment
-        depends_on:
-            - mongodb_payment_container
-        networks:
-            - setel_network
-    mongodb:
-        container_name: ${MONGO_CONTAINER_NAME}
-        image: mongo:4.2
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
-            MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
-        ports:
-            - ${MONGO_PORT}:27017
-        volumes:
-            - db-data-order:/data/db
-        networks:
-            - elearning-network
-volumes: 
-    db-data-order:
-    service:
+  react-service:
+    build:
+      context: .
+      dockerfile: packages/elearning-frontend/Dockerfile
+    container_name: ${FRONT_CONTAINER_NAME}
+    ports:
+      - ${FRONT_PORT}:80
+    volumes:
+      - service:/front
+    networks:
+      - setel_network
+  payment-service:
+    build:
+      context: .
+      dockerfile: packages/setel-payment/Dockerfile
+    container_name: ${PAYMENT_CONTAINER_NAME}
+    ports:
+      - ${PAYMENT_PORT}:3002
+    volumes:
+      - service:/payment
+    depends_on:
+      - mongodb_payment_container
+    networks:
+      - setel_network
+  mongodb:
+    container_name: ${MONGO_CONTAINER_NAME}
+    image: mongo:4.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
+    ports:
+      - ${MONGO_PORT}:27017
+    volumes:
+      - db-data-order:/data/db
+    networks:
+      - elearning-network
+volumes:
+  db-data-order:
+  service:
 networks:
-    setel_network:
-        name: ${NETWORK_NAME}
+  setel_network:
+    name: ${NETWORK_NAME}
