@@ -11,20 +11,20 @@ services:
     volumes:
       - service:/front
     networks:
-      - setel_network
+      - elearning-network
   payment-service:
     build:
       context: .
       dockerfile: packages/setel-payment/Dockerfile
     container_name: ${PAYMENT_CONTAINER_NAME}
     ports:
-      - ${PAYMENT_PORT}:3002
+      - ${BACK_PORT}:3001
     volumes:
       - service:/payment
     depends_on:
-      - mongodb_payment_container
+      - mongodb
     networks:
-      - setel_network
+      - elearning-network
   mongodb:
     container_name: ${MONGO_CONTAINER_NAME}
     image: mongo:4.2
@@ -41,5 +41,5 @@ volumes:
   db-data-order:
   service:
 networks:
-  setel_network:
+  elearning-network:
     name: ${NETWORK_NAME}
