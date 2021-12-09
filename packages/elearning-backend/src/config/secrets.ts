@@ -7,6 +7,9 @@ export const getEnv = (key: string): string => {
 }
 export const ENV = process.env.NODE_ENV
 export const PORT = process.env.ORDER_PORT
+// JWT
+export const JWT_SECRET = process.env.JWT_SECRET
+export const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME
 // Mongo
 const MONGO_USERNAME = getEnv('MONGO_USERNAME')
 const MONGO_PASSWORD = encodeURIComponent(getEnv('MONGO_PASSWORD'))
