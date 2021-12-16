@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('eLearning')
     .setDescription('Trang quản lí api')
     .setVersion('2.0')
+    .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document)
