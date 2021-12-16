@@ -4,7 +4,6 @@ import Role from '../role.enum'
 
 export class UsersDto {
   @ApiProperty()
-  @IsString()
   role: Role
 
   @ApiProperty()

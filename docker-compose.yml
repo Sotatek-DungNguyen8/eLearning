@@ -1,24 +1,13 @@
 version: "3.7"
 
 services:
-  react-service:
+  elearning-service:
     build:
       context: .
-      dockerfile: packages/elearning-frontend/Dockerfile
-    container_name: ${FRONT_CONTAINER_NAME}
+      dockerfile: packages/elearning-backend/Dockerfile
+    container_name: ${BACK_CONTAINER_NAME}
     ports:
-      - ${FRONT_PORT}:80
-    volumes:
-      - service:/front
-    networks:
-      - elearning-network
-  payment-service:
-    build:
-      context: .
-      dockerfile: packages/setel-payment/Dockerfile
-    container_name: ${PAYMENT_CONTAINER_NAME}
-    ports:
-      - ${BACK_PORT}:3001
+      - ${BACK_PORT}:3002
     volumes:
       - service:/payment
     depends_on:
