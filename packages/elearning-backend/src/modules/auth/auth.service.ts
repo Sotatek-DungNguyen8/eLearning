@@ -54,11 +54,8 @@ export class AuthService {
       )
     }
   }
-  public getJWTToken(email: string) {
-    const payload: TokenPayload = { email }
+  public getJWTToken(email: string, role: Role) {
+    const payload: TokenPayload = { email, role }
     return this.jwtService.sign(payload)
-  }
-  public getRole(email: string) {
-    return Role.User
   }
 }
