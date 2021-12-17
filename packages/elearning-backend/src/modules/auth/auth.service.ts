@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 import Role from '../users/role.enum'
 import { TokenPayload } from './entity/tokenpayload.entity'
+import { CreateUsersDto } from '../users/dto/create-users.dto'
 
 @Injectable()
 export class AuthService {
@@ -13,11 +14,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async register(registrationData: UsersDto) {
+  public async register(registrationData: CreateUsersDto) {
     const hashedPassword = await bcrypt.hash(registrationData.password, 10)
     try {
       const createdUser = await this.usersService.create({
         ...registrationData,
+        role: Role.User,
         password: hashedPassword,
       })
       createdUser.password = undefined

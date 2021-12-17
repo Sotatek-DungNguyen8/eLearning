@@ -14,6 +14,7 @@ import { AuthDto } from './dto/auth.dto'
 import { LocalAuthenticationGuard } from './localAuthentication.guard'
 import RequestWithUser from './dto/requestWithUser.dto'
 import { ResponseAuthDto } from './dto/responseAuth.dto'
+import { CreateUsersDto } from '../users/dto/create-users.dto'
 
 @ApiTags('auth')
 @Controller('auth')
@@ -23,8 +24,8 @@ export class AuthController {
   @Post('/register')
   @ApiOperation({ summary: 'Create new users' })
   @ApiResponse({ status: 201, description: 'Success', type: UsersDto })
-  async registerUser(@Body() usersDTO: UsersDto) {
-    return await this.authService.register(usersDTO)
+  async registerUser(@Body() usersDTO: CreateUsersDto) {
+    return this.authService.register(usersDTO)
   }
 
   @Post('/login')
