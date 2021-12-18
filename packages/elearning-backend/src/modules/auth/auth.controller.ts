@@ -1,13 +1,13 @@
 import {
   Body,
-  Controller, Get,
+  Controller, ExecutionContext, Get,
   HttpCode,
   Post,
   Req,
   Res,
   UseGuards,
 } from '@nestjs/common'
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { UsersDto } from '../users/dto/users.dto'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
@@ -15,6 +15,10 @@ import { LocalAuthenticationGuard } from './localAuthentication.guard'
 import RequestWithUser from './dto/requestWithUser.dto'
 import { ResponseAuthDto } from './dto/responseAuth.dto'
 import { CreateUsersDto } from '../users/dto/create-users.dto'
+import { AuthGuard } from '@nestjs/passport'
+import { JwtAuthGuard } from './jwt-auth.guard'
+import { AuthUser } from './auth.decorator'
+import { ExtractJwt } from 'passport-jwt'
 
 @ApiTags('auth')
 @Controller('auth')
@@ -43,9 +47,11 @@ export class AuthController {
   }
   @Get('/check-role')
   @HttpCode(200)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Check role' })
   @ApiResponse({ type: ResponseAuthDto })
-  async checkRole() {
-    return this.authService.checkRole
+  async checkRole(@Req() req) {
+    return this.authService.checkRole(req.user.email)
   }
 }

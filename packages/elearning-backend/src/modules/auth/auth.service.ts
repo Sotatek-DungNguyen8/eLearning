@@ -7,6 +7,7 @@ import Role from '../users/role.enum'
 import { TokenPayload } from './entity/tokenpayload.entity'
 import { CreateUsersDto } from '../users/dto/create-users.dto'
 import RequestWithUser from './dto/requestWithUser.dto'
+import { AuthUser } from './auth.decorator'
 
 @Injectable()
 export class AuthService {
@@ -61,10 +62,7 @@ export class AuthService {
     const payload: TokenPayload = { email, role }
     return this.jwtService.sign(payload)
   }
-  public checkRole(context: ExecutionContext){
-    const request = context.switchToHttp().getRequest<RequestWithUser>()
-    console.log(request.role)
-    return request.role
-
+  public checkRole(email: string) {
+    return this.usersService.getRole(email)
   }
 }
