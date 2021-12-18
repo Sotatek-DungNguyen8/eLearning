@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Get,
   HttpCode,
   Post,
   Req,
@@ -41,10 +41,10 @@ export class AuthController {
     }
     return user
   }
-  @Post('/check-role')
+  @Get('/check-role')
   @HttpCode(200)
   @ApiOperation({ summary: 'Check role' })
-  @ApiBody({ type: ResponseAuthDto })
+  @ApiResponse({ type: ResponseAuthDto })
   async checkRole() {
     return this.authService.checkRole
   }
