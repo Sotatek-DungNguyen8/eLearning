@@ -41,4 +41,11 @@ export class AuthController {
     }
     return user
   }
+  @Post('/check-role')
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Check role' })
+  @ApiBody({ type: ResponseAuthDto })
+  async checkRole() {
+    return this.authService.checkRole
+  }
 }

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { ExecutionContext, HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { UsersService } from '../users/users.service'
 import { UsersDto } from '../users/dto/users.dto'
 import * as bcrypt from 'bcrypt'
@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt'
 import Role from '../users/role.enum'
 import { TokenPayload } from './entity/tokenpayload.entity'
 import { CreateUsersDto } from '../users/dto/create-users.dto'
+import RequestWithUser from './dto/requestWithUser.dto'
 
 @Injectable()
 export class AuthService {
@@ -59,5 +60,11 @@ export class AuthService {
   public getJWTToken(email: string, role: Role) {
     const payload: TokenPayload = { email, role }
     return this.jwtService.sign(payload)
+  }
+  public checkRole(context: ExecutionContext){
+    const request = context.switchToHttp().getRequest<RequestWithUser>()
+    console.log(request.role)
+    return request.role
+
   }
 }
