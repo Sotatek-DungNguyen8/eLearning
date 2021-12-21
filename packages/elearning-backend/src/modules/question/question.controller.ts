@@ -27,6 +27,12 @@ export class QuestionController {
   async getAll() {
     return await this.questionService.getAll()
   }
+  @Get('/:id')
+  @ApiOperation({ summary: 'Get question by id' })
+  @ApiResponse({ status: 200, description: 'Success', type: CreateQuestion })
+  async getById(@Param('id') id: string) {
+    return await this.questionService.getById(id)
+  }
   @Put('/:id/update')
   @ApiOperation({ summary: 'Update question' })
   @ApiResponse({ status: 201, description: 'Success', type: CreateQuestion })

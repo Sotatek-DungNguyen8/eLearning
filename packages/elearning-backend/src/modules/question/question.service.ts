@@ -17,8 +17,10 @@ export class QuestionService {
     return this.questionRepository.createMany(dto)
   }
   public async getAll(): Promise<QuestionDocument[]> {
-    console.log(await this.questionRepository.getAll())
     return this.questionRepository.getAll()
+  }
+  public async getById(id: string): Promise<QuestionDocument> {
+    return this.questionRepository.getById({ id })
   }
   public async updateQuestion(
     id: string,
