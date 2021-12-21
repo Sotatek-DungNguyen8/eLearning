@@ -126,14 +126,17 @@ export class BaseRepository<T extends Document> {
     return model.create(docs)
   }
 
-  createMany(docs: any): Promise<T[]>
-  createMany<V extends Document>(docs: any, submodelName: string): Promise<V[]>
+  createMany(docs: any[]): Promise<T[]>
   createMany<V extends Document>(
-    docs: any,
+    docs: any[],
+    submodelName: string,
+  ): Promise<V[]>
+  createMany<V extends Document>(
+    docs: any[],
     submodelName?: string,
-  ): Promise<V | T> {
+  ): Promise<V[] | T[]> {
     const model = this.getModel<V>(submodelName)
-    return model.create(docs)
+    return model.insertMany(docs)
   }
 
   updateById({

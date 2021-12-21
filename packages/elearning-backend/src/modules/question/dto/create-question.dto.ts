@@ -32,6 +32,5 @@ export class CreateQuestion {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  @Min(0)
   correctAnswer: string
 }
