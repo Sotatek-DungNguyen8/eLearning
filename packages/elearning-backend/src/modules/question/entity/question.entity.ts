@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { IsDefined, IsNotEmpty, IsObject, IsString, Min } from 'class-validator'
 import { Document } from 'mongoose'
-import { QuestionType } from '../question.enum'
+import { AnswerType, QuestionType } from '../question.enum'
 import { ApiProperty } from '@nestjs/swagger'
 
 export const QUESTION_DB = 'question'
@@ -14,18 +14,30 @@ export const QUESTION_DB = 'question'
   validateBeforeSave: true,
 })
 export class Answer {
+  @Prop({
+    required: true,
+  })
   @ApiProperty()
   @IsString()
   answerA: string
 
+  @Prop({
+    required: true,
+  })
   @ApiProperty()
   @IsString()
   answerB: string
 
+  @Prop({
+    required: true,
+  })
   @ApiProperty()
   @IsString()
   answerC: string
 
+  @Prop({
+    required: true,
+  })
   @ApiProperty()
   @IsString()
   answerD: string
@@ -34,34 +46,22 @@ export class Question {
   @Prop({
     required: true,
   })
-  @IsString()
-  @IsNotEmpty()
-  @IsDefined()
   question: string
 
   @Prop({
     required: true,
-    unique: true,
   })
-  @IsString()
-  @IsNotEmpty()
   questionType: QuestionType
 
   @Prop({
     required: true,
   })
-  @IsObject()
-  @IsNotEmpty()
-  @Min(0)
   answer: Answer
 
   @Prop({
     required: true,
   })
-  @IsString()
-  @IsNotEmpty()
-  @Min(0)
-  correctAnswer: string
+  correctAnswer: AnswerType
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question)

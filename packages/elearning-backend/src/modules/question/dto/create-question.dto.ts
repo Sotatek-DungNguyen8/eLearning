@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import {
-  IsEnum,
-  IsNotEmpty,
-  IsObject,
-  IsString,
-  Min,
-} from 'class-validator'
+import { IsEnum, IsNotEmpty, IsObject, IsString, Min } from 'class-validator'
 import { AnswerType, QuestionType } from '../question.enum'
 import { Answer } from '../entity/question.entity'
 

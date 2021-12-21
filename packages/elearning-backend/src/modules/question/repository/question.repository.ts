@@ -8,8 +8,8 @@ import { QuestionDocument, QUESTION_DB } from '../entity/question.entity'
 export class QuestionRepository extends BaseRepository<QuestionDocument> {
   constructor(
     @InjectModel(QUESTION_DB)
-    private readonly usersModel: Model<QuestionDocument>,
+    private readonly questionModel: Model<QuestionDocument>,
   ) {
-    super(usersModel)
+    super(questionModel)
   }
 }

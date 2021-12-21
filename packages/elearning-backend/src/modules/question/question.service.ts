@@ -7,13 +7,17 @@ import { CreateQuestion } from './dto/create-question.dto'
 export class QuestionService {
   constructor(private readonly questionRepository: QuestionRepository) {}
 
-  public async create(dto: CreateQuestion): Promise<QuestionDocument> {
-    return this.questionRepository.create(dto)
+  public async create(dto: CreateQuestion) {
+    const data: Question = {
+      ...dto,
+    }
+    return this.questionRepository.create(data)
   }
   public async createMany(dto: CreateQuestion[]): Promise<QuestionDocument[]> {
     return this.questionRepository.createMany(dto)
   }
   public async getAll(): Promise<QuestionDocument[]> {
+    console.log(await this.questionRepository.getAll())
     return this.questionRepository.getAll()
   }
   public async updateQuestion(
