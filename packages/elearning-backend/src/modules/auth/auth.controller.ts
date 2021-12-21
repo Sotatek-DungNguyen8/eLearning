@@ -1,13 +1,19 @@
 import {
   Body,
-  Controller, ExecutionContext, Get,
+  Controller,
+  Get,
   HttpCode,
   Post,
   Req,
-  Res,
   UseGuards,
 } from '@nestjs/common'
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { UsersDto } from '../users/dto/users.dto'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
@@ -15,10 +21,7 @@ import { LocalAuthenticationGuard } from './localAuthentication.guard'
 import RequestWithUser from './dto/requestWithUser.dto'
 import { ResponseAuthDto } from './dto/responseAuth.dto'
 import { CreateUsersDto } from '../users/dto/create-users.dto'
-import { AuthGuard } from '@nestjs/passport'
 import { JwtAuthGuard } from './jwt-auth.guard'
-import { AuthUser } from './auth.decorator'
-import { ExtractJwt } from 'passport-jwt'
 
 @ApiTags('auth')
 @Controller('auth')
