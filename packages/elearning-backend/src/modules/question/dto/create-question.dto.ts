@@ -6,7 +6,7 @@ import {
   IsString,
   Min,
 } from 'class-validator'
-import { QuestionType } from '../question.enum'
+import { AnswerType, QuestionType } from '../question.enum'
 import { Answer } from '../entity/question.entity'
 
 export class CreateQuestion {
@@ -29,8 +29,12 @@ export class CreateQuestion {
   @IsNotEmpty()
   answer: Answer
 
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({
+    type: 'enum',
+    enum: AnswerType,
+    description: 'Select what type of Model: Prepaid/Postpaid',
+  })
+  @IsEnum(AnswerType)
   @IsNotEmpty()
-  correctAnswer: string
+  correctAnswer: AnswerType
 }
