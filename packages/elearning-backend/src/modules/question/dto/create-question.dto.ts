@@ -15,7 +15,11 @@ export class CreateQuestion {
   @IsNotEmpty()
   question: string
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'enum',
+    enum: QuestionType,
+    description: 'Select what type of Model: Prepaid/Postpaid',
+  })
   @IsEnum(QuestionType)
   @IsNotEmpty()
   questionType: QuestionType

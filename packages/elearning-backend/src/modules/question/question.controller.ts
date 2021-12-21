@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { QuestionService } from './question.service'
-import { ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger'
 import { CreateQuestion } from './dto/create-question.dto'
 
 @Controller('question')
@@ -15,6 +15,7 @@ export class QuestionController {
   }
   @Post('/createMany/')
   @ApiOperation({ summary: 'Create many new question' })
+  @ApiBody({ type: [CreateQuestion] })
   @ApiResponse({ status: 201, description: 'Success', type: [CreateQuestion] })
   async createManyQuestion(@Body() dto: CreateQuestion[]) {
     return await this.questionService.createMany(dto)
