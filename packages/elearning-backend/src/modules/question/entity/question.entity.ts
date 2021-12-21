@@ -6,13 +6,6 @@ import { ApiProperty } from '@nestjs/swagger'
 
 export const QUESTION_DB = 'question'
 
-@Schema({
-  collection: QUESTION_DB,
-  timestamps: true,
-  toJSON: { virtuals: true },
-  collation: { locale: 'vi' },
-  validateBeforeSave: true,
-})
 export class Answer {
   @Prop({
     required: true,
@@ -42,6 +35,14 @@ export class Answer {
   @IsString()
   answerD: string
 }
+
+@Schema({
+  collection: QUESTION_DB,
+  timestamps: true,
+  toJSON: { virtuals: true },
+  collation: { locale: 'vi' },
+  validateBeforeSave: true,
+})
 export class Question {
   @Prop({
     required: true,
