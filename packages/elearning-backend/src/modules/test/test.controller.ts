@@ -1,5 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common'
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { TestService } from './test.service'
 import { CreateTestDto } from './dto/create-test.dto'
 import { AnswerTestDto } from './dto/answer-test.dto'
@@ -21,7 +26,7 @@ export class TestController {
   @Post('/guest/test')
   @ApiOperation({ summary: 'Create new test' })
   @ApiResponse({ status: 201, description: 'Success', type: CreateTestDto })
-  async getTest(@Body('testCode') dto: CreateTestDto) {
+  async getTest(@Body() dto: CreateTestDto) {
     return await this.testService.getTest(dto.testCode)
   }
   @Post('/guest/answer')
