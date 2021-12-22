@@ -3,6 +3,7 @@ import { TestRepository } from './repository/test.repository'
 import { CreateTestDto } from './dto/create-test.dto'
 import { TestDocument } from './entity/test.entity'
 import { QuestionService } from '../question/question.service'
+import { AnswerTestDto } from './dto/answer-test.dto'
 
 @Injectable()
 export class TestService {
@@ -33,5 +34,19 @@ export class TestService {
     }
   }
 
-  // public async calculationAnswer(dto: )
+  public async getTest(code: string) {
+    return this.testRepository.getOne({ conditions: { code: code } })
+  }
+  public async calculationAnswer(dto: AnswerTestDto) {
+    const answer = dto.answer
+    let score = 0
+    for (const item of answer) {
+      const answer = await this.questionService.checkAnswer(
+        item.id,
+        item.answer,
+      )
+      score += answer
+    }
+    return score
+  }
 }

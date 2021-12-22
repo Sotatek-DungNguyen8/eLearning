@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { QuestionRepository } from './repository/question.repository'
 import { Question, QuestionDocument } from './entity/question.entity'
 import { CreateQuestion } from './dto/create-question.dto'
-import { QuestionType } from './question.enum'
+import { AnswerType, QuestionType } from './question.enum'
 
 @Injectable()
 export class QuestionService {
@@ -73,5 +73,13 @@ export class QuestionService {
         _id: { $in: ids },
       },
     })
+  }
+
+  public async checkAnswer(id: string, answer: AnswerType) {
+    const question = await this.questionRepository.getById({ id })
+    if (question.correctAnswer === answer) {
+      return 1
+    }
+    return 0
   }
 }
