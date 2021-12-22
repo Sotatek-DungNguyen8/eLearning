@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 import Role from '../role.enum'
 
 export class UsersDto {
@@ -20,4 +20,9 @@ export class UsersDto {
   @IsNotEmpty()
   @IsString()
   password: string
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  balance: number
 }

@@ -24,26 +24,23 @@ export class Users {
   @Prop({
     required: true,
   })
-  @IsString()
-  @IsNotEmpty()
-  @IsDefined()
   name: string
 
   @Prop({
     required: true,
     unique: true,
   })
-  @IsString()
-  @IsNotEmpty()
   email: string
 
   @Prop({
     required: true,
   })
-  @IsString()
-  @IsNotEmpty()
-  @Min(0)
   password: string
+
+  @Prop({
+    default: 0,
+  })
+  balance: number
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users)
