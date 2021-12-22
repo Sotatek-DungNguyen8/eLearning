@@ -23,6 +23,7 @@ export class AuthService {
         ...registrationData,
         role: Role.User,
         password: hashedPassword,
+        balance: 0,
       })
       createdUser.password = undefined
       return createdUser
