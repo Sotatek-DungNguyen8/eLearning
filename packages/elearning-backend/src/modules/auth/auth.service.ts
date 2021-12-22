@@ -1,13 +1,10 @@
-import { ExecutionContext, HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { UsersService } from '../users/users.service'
-import { UsersDto } from '../users/dto/users.dto'
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 import Role from '../users/role.enum'
 import { TokenPayload } from './entity/tokenpayload.entity'
 import { CreateUsersDto } from '../users/dto/create-users.dto'
-import RequestWithUser from './dto/requestWithUser.dto'
-import { AuthUser } from './auth.decorator'
 
 @Injectable()
 export class AuthService {

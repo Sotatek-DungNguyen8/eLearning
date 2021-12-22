@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { UsersDto } from './dto/users.dto'
 import {
-  ApiBearerAuth, ApiBody,
+  ApiBearerAuth,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -25,7 +25,7 @@ export class UsersController {
     return await this.usersService.create(usersDTO)
   }
 
-  @Post()
+  @Get('/balance')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'get users balance' })
   @ApiResponse({ status: 200, description: 'Success', type: BalanceDto })
@@ -33,7 +33,7 @@ export class UsersController {
     return await this.usersService.checkBalance(req.user.email)
   }
 
-  @Post()
+  @Post('/balance')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'top up users balance' })
   @ApiResponse({ status: 200, description: 'Success', type: BalanceDto })
