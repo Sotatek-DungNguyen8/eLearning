@@ -9,6 +9,7 @@ import { TestService } from './test.service'
 import { CreateTestDto } from './dto/create-test.dto'
 import { AnswerTestDto } from './dto/answer-test.dto'
 import { ScoreDto } from './dto/score.dto'
+import { TestCodeDto } from './dto/testCode.dto'
 
 @ApiTags('test')
 @ApiBearerAuth()
@@ -26,7 +27,7 @@ export class TestController {
   @Post('/guest/test')
   @ApiOperation({ summary: 'Create new test' })
   @ApiResponse({ status: 201, description: 'Success', type: CreateTestDto })
-  async getTest(@Body() dto: CreateTestDto) {
+  async getTest(@Body() dto: TestCodeDto) {
     return await this.testService.getTest(dto.testCode)
   }
   @Post('/guest/answer')
