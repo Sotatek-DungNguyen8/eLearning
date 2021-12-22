@@ -70,7 +70,7 @@ export class QuestionController {
   async getByIdForTest(@Param('id') id: string) {
     return await this.questionService.getByIdForTest(id)
   }
-  @Get('/type')
+  @Post('/type')
   @UseGuards(RoleGuard(Role.Admin))
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get question by type' })
