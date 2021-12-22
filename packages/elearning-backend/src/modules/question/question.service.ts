@@ -36,17 +36,7 @@ export class QuestionService {
         HttpStatus.BAD_REQUEST,
       )
     }
-    return this.questionRepository.updateOne({
-      conditions: {
-        _id: id,
-      },
-      update: {
-        dto,
-      },
-      options: {
-        new: true,
-      },
-    })
+    return this.questionRepository.updateById({ id, update: dto })
   }
   public async deleteQuestion(id: string): Promise<QuestionDocument> {
     const question = await this.questionRepository.getById({ id })
