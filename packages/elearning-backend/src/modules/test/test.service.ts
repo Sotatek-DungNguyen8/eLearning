@@ -39,7 +39,7 @@ export class TestService {
   }
 
   public async getTest(code: string) {
-    return this.testRepository.getOne({ conditions: { code: code } })
+    return this.testRepository.getOne({ conditions: { codeTest: code } })
   }
 
   public async calculationAnswer(dto: AnswerTestDto) {
