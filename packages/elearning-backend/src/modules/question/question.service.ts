@@ -26,7 +26,9 @@ export class QuestionService {
   }
 
   public async getByType(type: QuestionType): Promise<QuestionDocument[]> {
-    return this.questionRepository.getMany({ conditions: { type: type } })
+    return this.questionRepository.getMany({
+      conditions: { questionType: type },
+    })
   }
 
   public async getByIdForTest(id: string): Promise<QuestionDocument> {
@@ -68,7 +70,7 @@ export class QuestionService {
   public async checkQuestion(ids: [string]) {
     return await this.questionRepository.count({
       conditions: {
-        id: { $in: ids },
+        _id: { $in: ids },
       },
     })
   }

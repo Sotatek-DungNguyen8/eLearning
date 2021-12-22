@@ -15,6 +15,7 @@ import RoleGuard from '../auth/role.guard'
 import Role from '../users/role.enum'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 import { GetQuestionResponseDto } from './dto/get-question.response.dto'
+import { QuestionTypeDto } from './dto/question-type.dto'
 
 @ApiTags('question')
 @ApiBearerAuth()
@@ -72,15 +73,13 @@ export class QuestionController {
     return await this.questionService.getByIdForTest(id)
   }
   @Post('/type')
-  @UseGuards(RoleGuard(Role.Admin))
-  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get question by type' })
   @ApiResponse({
     status: 200,
     description: 'Success',
-    type: GetQuestionResponseDto,
+    type: [GetQuestionResponseDto],
   })
-  async getByType(@Body() dto: CreateQuestion) {
+  async getByType(@Body() dto: QuestionTypeDto) {
     return await this.questionService.getByType(dto.questionType)
   }
 
