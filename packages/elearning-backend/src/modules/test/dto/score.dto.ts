@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator'
-import { Answer } from './answer-test.dto'
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
 export class ScoreDto {
   @ApiProperty()

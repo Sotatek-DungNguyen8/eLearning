@@ -7,6 +7,15 @@ import {
   IsString,
 } from 'class-validator'
 import { AnswerType } from '../../question/question.enum'
+export class AnswerRequest {
+  @ApiProperty()
+  @IsString()
+  id: string
+
+  @ApiProperty()
+  @IsString()
+  answer: AnswerType
+}
 
 export class AnswerTestDto {
   @ApiProperty()
@@ -19,17 +28,8 @@ export class AnswerTestDto {
   @IsNotEmpty()
   numberQuestion: number
 
-  @ApiProperty()
+  @ApiProperty({ type: [AnswerRequest] })
   @IsArray()
   @IsNotEmpty()
-  answer: Answer[]
-}
-export class Answer {
-  @ApiProperty()
-  @IsString()
-  id: string
-
-  @ApiProperty()
-  @IsString()
-  answer: AnswerType
+  answer: AnswerRequest[]
 }
