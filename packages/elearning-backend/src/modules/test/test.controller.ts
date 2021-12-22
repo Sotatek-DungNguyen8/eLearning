@@ -1,9 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common'
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { TestService } from './test.service'
 import { CreateTestDto } from './dto/create-test.dto'
 
 @ApiTags('test')
+@ApiBearerAuth()
 @Controller('test')
 export class TestController {
   constructor(private readonly testService: TestService) {}

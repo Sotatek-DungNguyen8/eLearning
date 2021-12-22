@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { QuestionService } from './question.service'
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateQuestion } from './dto/create-question.dto'
 import RoleGuard from '../auth/role.guard'
 import Role from '../users/role.enum'
@@ -17,6 +17,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 import { GetQuestionResponseDto } from './dto/get-question.response.dto'
 
 @ApiTags('question')
+@ApiBearerAuth()
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
