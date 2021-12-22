@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { QuestionRepository } from './repository/question.repository'
 import { Question, QuestionDocument } from './entity/question.entity'
 import { CreateQuestion } from './dto/create-question.dto'
+import { QuestionType } from './question.enum'
 
 @Injectable()
 export class QuestionService {
@@ -19,8 +20,13 @@ export class QuestionService {
   public async getAll(): Promise<QuestionDocument[]> {
     return this.questionRepository.getAll()
   }
+
   public async getById(id: string): Promise<QuestionDocument> {
     return this.questionRepository.getById({ id })
+  }
+
+  public async getByType(type: QuestionType): Promise<QuestionDocument[]> {
+    return this.questionRepository.getMany({ conditions: { type: type } })
   }
 
   public async getByIdForTest(id: string): Promise<QuestionDocument> {

@@ -70,6 +70,18 @@ export class QuestionController {
   async getByIdForTest(@Param('id') id: string) {
     return await this.questionService.getByIdForTest(id)
   }
+  @Get('/type')
+  @UseGuards(RoleGuard(Role.Admin))
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Get question by type' })
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+    type: GetQuestionResponseDto,
+  })
+  async getByType(@Body() dto: CreateQuestion) {
+    return await this.questionService.getByIdForTest(dto.questionType)
+  }
 
   @Put('/:id/update')
   @UseGuards(RoleGuard(Role.Admin))
