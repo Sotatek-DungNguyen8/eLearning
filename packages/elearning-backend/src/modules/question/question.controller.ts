@@ -9,7 +9,13 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { QuestionService } from './question.service'
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { CreateQuestion } from './dto/create-question.dto'
 import RoleGuard from '../auth/role.guard'
 import Role from '../users/role.enum'
@@ -60,9 +66,7 @@ export class QuestionController {
     return await this.questionService.getById(id)
   }
 
-  @Get('/test-question/:id')
-  @UseGuards(RoleGuard(Role.User))
-  @UseGuards(JwtAuthGuard)
+  @Get('/no-answer/:id')
   @ApiOperation({ summary: 'Get question by id' })
   @ApiResponse({
     status: 200,
