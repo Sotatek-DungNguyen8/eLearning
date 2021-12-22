@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { IsDefined, IsNotEmpty, IsString, Min } from 'class-validator'
 import { Document } from 'mongoose'
 import * as mongoose from 'mongoose'
 import Role from '../role.enum'

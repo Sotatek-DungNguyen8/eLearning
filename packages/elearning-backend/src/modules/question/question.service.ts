@@ -22,6 +22,12 @@ export class QuestionService {
   public async getById(id: string): Promise<QuestionDocument> {
     return this.questionRepository.getById({ id })
   }
+
+  public async getByIdForTest(id: string): Promise<QuestionDocument> {
+    const result = await this.questionRepository.getById({ id })
+    result.correctAnswer = undefined
+    return result
+  }
   public async updateQuestion(
     id: string,
     dto: CreateQuestion,
@@ -38,6 +44,7 @@ export class QuestionService {
     }
     return this.questionRepository.updateById({ id, update: dto })
   }
+
   public async deleteQuestion(id: string): Promise<QuestionDocument> {
     const question = await this.questionRepository.getById({ id })
     if (!question) {
@@ -50,5 +57,13 @@ export class QuestionService {
       )
     }
     return this.questionRepository.deleteById(id)
+  }
+
+  public async checkQuestion(ids: [string]) {
+    return await this.questionRepository.count({
+      conditions: {
+        id: { $in: ids },
+      },
+    })
   }
 }

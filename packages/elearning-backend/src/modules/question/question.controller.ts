@@ -14,6 +14,7 @@ import { CreateQuestion } from './dto/create-question.dto'
 import RoleGuard from '../auth/role.guard'
 import Role from '../users/role.enum'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+import { GetQuestionResponseDto } from './dto/get-question.response.dto'
 
 @ApiTags('question')
 @Controller('question')
@@ -47,11 +48,27 @@ export class QuestionController {
   async getAll() {
     return await this.questionService.getAll()
   }
+
   @Get('/:id')
+  @UseGuards(RoleGuard(Role.Admin))
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get question by id' })
   @ApiResponse({ status: 200, description: 'Success', type: CreateQuestion })
   async getById(@Param('id') id: string) {
     return await this.questionService.getById(id)
+  }
+
+  @Get('/test-question/:id')
+  @UseGuards(RoleGuard(Role.User))
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Get question by id' })
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+    type: GetQuestionResponseDto,
+  })
+  async getByIdForTest(@Param('id') id: string) {
+    return await this.questionService.getByIdForTest(id)
   }
 
   @Put('/:id/update')
@@ -62,7 +79,6 @@ export class QuestionController {
   async updateQuestion(@Param('id') id: string, @Body() dto: CreateQuestion) {
     return await this.questionService.updateQuestion(id, dto)
   }
-
   @Delete('/:id')
   @UseGuards(RoleGuard(Role.Admin))
   @UseGuards(JwtAuthGuard)
