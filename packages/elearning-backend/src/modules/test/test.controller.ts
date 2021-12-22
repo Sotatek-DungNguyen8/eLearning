@@ -24,6 +24,13 @@ export class TestController {
     return await this.testService.create(dto)
   }
 
+  @Post()
+  @ApiOperation({ summary: 'get All test' })
+  @ApiResponse({ status: 201, description: 'Success', type: [CreateTestDto] })
+  async getAllTest() {
+    return await this.testService.getAll()
+  }
+
   @Post('/guest/test')
   @ApiOperation({ summary: 'Create new test' })
   @ApiResponse({ status: 201, description: 'Success', type: CreateTestDto })

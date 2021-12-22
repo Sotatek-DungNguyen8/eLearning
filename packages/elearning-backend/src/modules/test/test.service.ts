@@ -34,9 +34,14 @@ export class TestService {
     }
   }
 
+  public async getAll(): Promise<TestDocument[]> {
+    return this.testRepository.getAll()
+  }
+
   public async getTest(code: string) {
     return this.testRepository.getOne({ conditions: { code: code } })
   }
+
   public async calculationAnswer(dto: AnswerTestDto) {
     const answer = dto.answer
     let score = 0
