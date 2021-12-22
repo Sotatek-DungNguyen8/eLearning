@@ -80,7 +80,7 @@ export class QuestionController {
     type: GetQuestionResponseDto,
   })
   async getByType(@Body() dto: CreateQuestion) {
-    return await this.questionService.getByIdForTest(dto.questionType)
+    return await this.questionService.getByType(dto.questionType)
   }
 
   @Put('/:id/update')
