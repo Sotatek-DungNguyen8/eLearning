@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { UsersDto } from './dto/users.dto'
 import {
-  ApiBearerAuth,
+  ApiBearerAuth, ApiExcludeEndpoint,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -19,6 +19,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @ApiExcludeEndpoint()
   @ApiOperation({ summary: 'Create new users' })
   @ApiResponse({ status: 201, description: 'Success', type: UsersDto })
   async createOrder(@Body() usersDTO: UsersDto) {

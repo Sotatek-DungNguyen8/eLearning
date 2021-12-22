@@ -2,16 +2,19 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { UsersRepository } from './repository/users.repository'
 import { Users, UsersDocument } from './entity/users.entity'
 import { UsersDto } from './dto/users.dto'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   public async create(dto: UsersDto): Promise<UsersDocument> {
+    const hashedPassword = await bcrypt.hash(dto.password, 10)
     const users: Users = {
       ...dto,
       balance: 0,
     }
+    users.password = hashedPassword
     return this.usersRepository.create(users)
   }
 
