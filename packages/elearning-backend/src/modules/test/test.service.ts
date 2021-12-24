@@ -11,7 +11,6 @@ import { QuestionService } from '../question/question.service'
 import { AnswerTestDto } from './dto/answer-test.dto'
 import { UsersService } from '../users/users.service'
 import { SetTestRepository } from './repository/setTest.repository'
-import { QuestionType } from './test.enum'
 
 @Injectable()
 export class TestService {
@@ -57,8 +56,16 @@ export class TestService {
     return this.setTestRepository.getMany({ conditions: { idUser: user.id } })
   }
 
+  public async getTestID(id: string) {
+    const user = await this.testRepository.getById({ id })
+    return this.setTestRepository.getMany({ conditions: { idUser: user.id } })
+  }
+
   public async getTestRandom() {
-    return this.testRepository.getOne({})
+    const count = await this.testRepository.count()
+    const random = Math.floor(Math.random() * count)
+
+    return this.testRepository.getOne({ options: { skip: random } })
   }
 
   public async updateTest(id: string, dto: CreateTestDto) {
