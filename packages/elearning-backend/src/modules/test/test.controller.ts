@@ -66,7 +66,7 @@ export class TestController {
     return await this.testService.getTest(dto.testCode)
   }
 
-  @Post('/test/user')
+  @Get('/test/user')
   @UseGuards(RoleGuard(Role.User))
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'get random test' })
