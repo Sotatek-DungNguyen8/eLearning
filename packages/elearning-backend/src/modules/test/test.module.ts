@@ -7,6 +7,7 @@ import { TestRepository } from './repository/test.repository'
 import { QuestionModule } from '../question/question.module'
 import { SetTestSchema, SETTEST_DB } from './entity/setTest.entity'
 import { UsersModule } from '../users/users.module'
+import { SetTestRepository } from './repository/setTest.repository'
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { UsersModule } from '../users/users.module'
     QuestionModule,
     UsersModule,
   ],
-  providers: [TestService, TestRepository],
+  providers: [TestService, TestRepository, SetTestRepository],
   controllers: [TestController],
 })
 export class TestModule {}
