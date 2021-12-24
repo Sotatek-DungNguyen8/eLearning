@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 import { TestRepository } from './repository/test.repository'
 import { CreateTestDto } from './dto/create-test.dto'
 import { TestDocument } from './entity/test.entity'
@@ -53,6 +58,22 @@ export class TestService {
 
   public async getTestRandom() {
     return this.testRepository.getOne({})
+  }
+
+  public async updateTest(id: string, dto: CreateTestDto) {
+    const checkTest = await this.testRepository.getById({ id })
+    if (!checkTest) {
+      throw new NotFoundException('NOT_FOUND_TEST')
+    }
+    return this.testRepository.updateById({ id, update: { dto } })
+  }
+
+  public async deleteTest(id: string) {
+    const checkTest = await this.testRepository.getById({ id })
+    if (!checkTest) {
+      throw new NotFoundException('NOT_FOUND_TEST')
+    }
+    return this.testRepository.deleteById(id)
   }
 
   public async calculationAnswer(dto: AnswerTestDto) {
