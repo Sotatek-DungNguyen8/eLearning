@@ -9,3 +9,9 @@ export enum AnswerType {
   C = 'C',
   D = 'D',
 }
+
+export enum DifficultyType {
+  Easy = 'Easy',
+  Medium = 'Medium',
+  Hard = 'Hard',
+}
