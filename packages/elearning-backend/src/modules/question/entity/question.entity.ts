@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { IsDefined, IsNotEmpty, IsObject, IsString, Min } from 'class-validator'
 import { Document } from 'mongoose'
-import { AnswerType, QuestionType } from '../question.enum'
+import { AnswerType, DifficultyType, QuestionType } from '../question.enum'
 import { ApiProperty } from '@nestjs/swagger'
 
 export const QUESTION_DB = 'question'
@@ -63,6 +63,11 @@ export class Question {
     required: true,
   })
   correctAnswer: AnswerType
+
+  @Prop({
+    required: true,
+  })
+  difficulty: DifficultyType
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question)

@@ -14,15 +14,13 @@ export const SETTEST_DB = 'settest'
 export class SetTest {
   @Prop({
     required: true,
-    unique: true,
   })
-  testCode: string
+  idUser: string
 
   @Prop({
     required: true,
-    unique: true,
   })
-  type: GuestType
+  score: number
 }
 
 export const SetTestSchema = SchemaFactory.createForClass(SetTest)

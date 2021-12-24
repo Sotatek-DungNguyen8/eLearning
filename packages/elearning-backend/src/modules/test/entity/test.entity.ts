@@ -32,6 +32,11 @@ export class Test {
     required: true,
   })
   type: QuestionType
+
+  @Prop({
+    required: true,
+  })
+  time: number
 }
 
 export const TestSchema = SchemaFactory.createForClass(Test)

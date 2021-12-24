@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsObject, IsString, Min } from 'class-validator'
-import { AnswerType, QuestionType } from '../question.enum'
+import { AnswerType, DifficultyType, QuestionType } from '../question.enum'
 import { Answer } from '../entity/question.entity'
 
 export class CreateQuestion {
@@ -31,4 +31,13 @@ export class CreateQuestion {
   @IsEnum(AnswerType)
   @IsNotEmpty()
   correctAnswer: AnswerType
+
+  @ApiProperty({
+    type: 'enum',
+    enum: DifficultyType,
+    description: 'Select what type of Model: Prepaid/Postpaid',
+  })
+  @IsEnum(DifficultyType)
+  @IsNotEmpty()
+  difficulty: DifficultyType
 }
