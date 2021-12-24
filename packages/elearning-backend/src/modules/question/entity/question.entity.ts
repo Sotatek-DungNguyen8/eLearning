@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { IsDefined, IsNotEmpty, IsObject, IsString, Min } from 'class-validator'
+import { IsString } from 'class-validator'
 import { Document } from 'mongoose'
 import { AnswerType, DifficultyType, QuestionType } from '../question.enum'
 import { ApiProperty } from '@nestjs/swagger'
