@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -65,5 +65,17 @@ export class TestController {
   @ApiResponse({ status: 201, description: 'Success', type: AnswerTestUserDto })
   async calculationAnswerUser(@Req() req, @Body() dto: AnswerTestDto) {
     return await this.testService.calculationAnswerUser(req.user.email, dto)
+  }
+  @Get('/answer/user')
+  @UseGuards(RoleGuard(Role.User))
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'get all test' })
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+    type: [AnswerTestUserDto],
+  })
+  async getALlTestResult(@Req() req) {
+    return await this.testService.getTestByID(req.user.email)
   }
 }

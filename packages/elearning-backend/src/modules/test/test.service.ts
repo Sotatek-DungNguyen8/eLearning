@@ -46,6 +46,11 @@ export class TestService {
     return this.testRepository.getOne({ conditions: { testCode: code } })
   }
 
+  public async getTestByID(email: string) {
+    const user = await this.usersService.getByEmail(email)
+    return this.testRepository.getMany({ conditions: { idUser: user.id } })
+  }
+
   public async getTestRandom() {
     return this.testRepository.getOne({})
   }
