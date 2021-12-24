@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common'
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -28,11 +38,25 @@ export class TestController {
     return await this.testService.create(dto)
   }
 
-  @Post()
+  @Get()
   @ApiOperation({ summary: 'get All test' })
   @ApiResponse({ status: 201, description: 'Success', type: [CreateTestDto] })
   async getAllTest() {
     return await this.testService.getAll()
+  }
+
+  @Put('/:id/update')
+  @ApiOperation({ summary: 'update new test' })
+  @ApiResponse({ status: 201, description: 'Success', type: CreateTestDto })
+  async updateTest(@Param('id') id: string, @Body() dto: CreateTestDto) {
+    return await this.testService.updateTest(id, dto)
+  }
+
+  @Delete('/:id')
+  @ApiOperation({ summary: 'delete a test' })
+  @ApiResponse({ status: 201, description: 'Success', type: [CreateTestDto] })
+  async deleteTest(@Param('id') id: string) {
+    return await this.testService.deleteTest(id)
   }
 
   @Post('/test/guest')
