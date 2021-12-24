@@ -58,7 +58,7 @@ export class TestService {
 
   public async getTestID(id: string) {
     const user = await this.testRepository.getById({ id })
-    return this.setTestRepository.getMany({ conditions: { idUser: user.id } })
+    return this.testRepository.getOne({ conditions: { idUser: user.id } })
   }
 
   public async getTestRandom() {
