@@ -45,7 +45,7 @@ export class TestController {
     return await this.testService.getAll()
   }
 
-  @Get('/id')
+  @Get('/:id')
   @ApiOperation({ summary: 'get test by id' })
   @ApiResponse({ status: 201, description: 'Success', type: [CreateTestDto] })
   async getTestById(@Param('id') id: string) {
