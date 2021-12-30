@@ -25,6 +25,24 @@ export class QuestionService {
     return this.questionRepository.getById({ id })
   }
 
+  public async searchByName(
+    questionSearch: string,
+  ): Promise<QuestionDocument[]> {
+    const data = await this.questionRepository.getMany({
+      conditions: { question: { $regex: '.*' + questionSearch + '.*' } },
+    })
+    if (!data) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: `Can't find Question`,
+        },
+        HttpStatus.BAD_REQUEST,
+      )
+    }
+    return data
+  }
+
   public async getByType(type: QuestionType): Promise<QuestionDocument[]> {
     return this.questionRepository.getMany({
       conditions: { questionType: type },

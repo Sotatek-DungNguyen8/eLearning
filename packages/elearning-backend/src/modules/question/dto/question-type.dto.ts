@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsNotEmpty, IsObject, IsString, Min } from 'class-validator'
+import { IsEnum, IsNotEmpty } from 'class-validator'
 import { QuestionType } from '../question.enum'
 
 export class QuestionTypeDto {
@@ -11,5 +11,4 @@ export class QuestionTypeDto {
   @IsEnum(QuestionType)
   @IsNotEmpty()
   questionType: QuestionType
-
 }

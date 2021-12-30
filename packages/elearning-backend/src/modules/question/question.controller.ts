@@ -22,6 +22,7 @@ import Role from '../users/role.enum'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 import { GetQuestionResponseDto } from './dto/get-question.response.dto'
 import { QuestionTypeDto } from './dto/question-type.dto'
+import { QuestionSearchDto } from './dto/search-question.dto'
 
 @ApiTags('question')
 @ApiBearerAuth()
@@ -102,5 +103,11 @@ export class QuestionController {
   @ApiResponse({ status: 201, description: 'Success', type: 'Delete success' })
   async delete(@Param('id') id: string) {
     return await this.questionService.deleteQuestion(id)
+  }
+
+  @Post('/search')
+  @ApiOperation({ summary: 'Search question' })
+  async searchNameQuestion(@Body() dto: QuestionSearchDto) {
+    return await this.questionService.searchByName(dto.questionSearch)
   }
 }
