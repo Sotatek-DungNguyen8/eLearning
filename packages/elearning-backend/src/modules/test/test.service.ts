@@ -72,7 +72,11 @@ export class TestService {
     if (!checkTest) {
       throw new NotFoundException('NOT_FOUND_TEST')
     }
-    return this.testRepository.updateById({ id, update: { dto } })
+    return this.testRepository.updateById({
+      id,
+      update: dto,
+      options: { new: true },
+    })
   }
 
   public async deleteTest(id: string) {
